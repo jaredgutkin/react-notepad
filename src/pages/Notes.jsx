@@ -4,14 +4,21 @@ import {BsPlusLg} from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
 import NoteItem from '../components/NoteItem'
+import { useState } from 'react'
 
-function Notes({notes}) {
+const Notes = ({notes}) => {
+
+  const [showSearch, setShowSearch] = useState(false);
+
   return (
     <section>
         <header className="notes__header">
-            <h2>My Notes</h2>
-            <input type="text" autoFocus placeholder='Keyword...' />
-            <button className='btn'><CiSearch/></button>
+            {!showSearch && <h2>My Notes</h2>}
+            { showSearch && <input type="text" autoFocus placeholder='Keyword...' />}
+            <button 
+              className='btn'
+              onClick={() => setShowSearch(prevState => !prevState)}
+            ><CiSearch/></button>
         </header>
         <div className="notes__container">
           {
